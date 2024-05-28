@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package = "github.com/lavquik/totality/generated";
+message UserId {
+    string id=1;
+}
+
+message Details {
+    string name=1;
+    string address=2;
+    int64 number=3;
+}
+
+service Testing {
+    rpc GetUserDetails(UserId) returns (Details);
+}
