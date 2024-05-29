@@ -1,0 +1,56 @@
+syntax = "proto3";
+option go_package = "github.com/lavquik/totality/api/pb";
+message UserId {
+    string id=1;
+}
+
+message Details {
+    string name=1;
+    string address=2;
+    int64 number=3;
+}
+
+service UserService {
+    rpc GetUserDetails(GetUserRequest) returns (UserDetailsResponse);
+    rpc GetUserList(GetUserListRequest) returns (UserListResponse);
+    rpc SearchUsers(SearchUsersRequest) returns (UserListResponse);
+}
+ 
+message GetUserRequest {
+    string id = 1;
+}
+
+message GetUserListRequest {
+	int32 pageNumber = 1;
+    int32 pageSize = 2;
+    repeated string ids = 3;
+}
+
+message SearchUsersRequest {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    UserDetails filters = 3;
+}
+
+enum Married {
+    UNSPECIFIED = 0;
+    TRUE = 1;
+    FALSE = 2;
+}
+
+message UserDetails {
+    string id = 1;
+    string name = 2;
+    string city = 3;
+    int64 phone = 4;
+    float height = 5;
+    Married married = 6; 
+}
+
+message UserDetailsResponse {
+    UserDetails user = 1;
+}
+
+message UserListResponse {
+    repeated UserDetails users = 1;
+}
