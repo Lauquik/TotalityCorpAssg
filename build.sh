@@ -18,3 +18,5 @@ for proto_file in ${PROTO_DIR}/*.proto; do
 done
 
 echo "Proto files generated successfully"
+
+go build -o build/userService ./cmd
