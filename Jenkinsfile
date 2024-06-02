@@ -1,14 +1,20 @@
 pipeline {
     agent any
     stages {
+        stage('Install') {
+            steps {
+                powershell 'mkdir ./api/pb'
+                powershell 'protoc --proto_path=./api/proto --go_out=./api/pb --go_opt=module=github.com/lavquik/totality/api/pb --go-grpc_out=./api/pb --go-grpc_opt=module=github.com/lavquik/totality/api/pb ./api/proto/user.proto'
+            }
+        }
         stage('Build') {
             steps {
-                bash './build.sh'
+                powershell 'go build -o build/userService ./cmd'
             }
         }
         stage('Test'){
             steps {
-                bash 'go test ./... -v'
+                powershell 'go test ./... -v'
             }
         }
     }
