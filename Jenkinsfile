@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                powershell './build.sh'
+                bash './build.sh'
             }
         }
         stage('Test'){
             steps {
-                powershell 'go test ./... -v'
+                bash 'go test ./... -v'
             }
         }
     }
